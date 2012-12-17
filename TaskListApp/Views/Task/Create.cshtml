@@ -1,0 +1,71 @@
+﻿@model TaskListApp.Models.Task
+
+@{
+    Layout = "~/Views/Shared/_TaskLayout.cshtml";
+    ViewBag.Title = "Create";
+}
+
+	<script type="text/javascript">
+		$(function(){
+			$('.date-picker').datepicker({
+		        inline: true
+		    });
+     		    
+		})
+	</script>
+
+
+    <fieldset>
+        <legend>Add a Task</legend>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+        <strong>DATE:</strong>
+        <div class="input-control text span2 disabled">
+            @Html.TextBoxFor(model => model.Date, new { @class = "date-picker" })
+
+            @Html.ValidationMessageFor(model => model.Date)
+        </div>
+
+        <div>
+        <strong>LEVEL:</strong>
+            @Html.ValidationMessageFor(model => model.Level)
+
+            <label class="radiobox">
+            @Html.RadioButtonFor(model => model.Level, "UnImportant", new { @checked = "true"}) <span class="fg-color-grayDark"><strong>UnImportant</strong></span>
+            </label>
+            <label class="radiobox">
+            @Html.RadioButtonFor(model => model.Level, "Normal") <span class="fg-color-orange"><strong>Normal</strong> </span>
+            </label>
+            <label class="radiobox">
+            @Html.RadioButtonFor(model => model.Level, "Vital") <span class="fg-color-red"><strong>Vital</strong></span>
+            </label>
+        </div>
+
+        <strong>TITLE:</strong>
+        <div class="input-control text span3">
+            @Html.TextBoxFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <strong>CONTENT:</strong>
+        <div class="input-control textarea span6">
+            @Html.TextAreaFor(model => model.Content)
+            @Html.ValidationMessageFor(model => model.Content)
+        </div>
+
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+
+}
+
+</fieldset>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

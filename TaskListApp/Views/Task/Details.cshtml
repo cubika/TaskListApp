@@ -1,0 +1,39 @@
+﻿@model TaskListApp.Models.Task
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_TaskLayout.cshtml";
+}
+
+<fieldset>
+    <legend>Task Details</legend>
+
+    <strong>DATE:</strong>
+    <h4>
+        @Html.DisplayFor(model => model.Date)
+    </h4>
+
+    <strong>TITLE:</strong>
+    <h4>
+        @Html.DisplayFor(model => model.Title)
+    </h4>
+
+    <strong>CONTENT:</strong>
+    <h4>
+        @Html.DisplayTextFor(model => model.Content)
+    </h4>
+
+    <strong>LEVEL:</strong>
+    <h4>
+        @Html.DisplayFor(model => model.Level)
+    </h4>
+
+    <strong>ISCOMPLETE:</strong>
+    <h4>
+        @Html.DisplayTextFor(model => model.IsComplete)
+    </h4>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.TaskId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

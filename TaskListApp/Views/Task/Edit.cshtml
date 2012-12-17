@@ -1,0 +1,80 @@
+﻿@model TaskListApp.Models.Task
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_TaskLayout.cshtml";
+}
+
+	<script type="text/javascript">
+		$(function(){
+			$('.date-picker').datepicker({
+		        inline: true
+		    });
+     		    
+		})
+	</script>
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+        <fieldset>
+        <legend>Edit</legend>
+
+            @Html.HiddenFor(model=>model.TaskId)
+
+        <strong>DATE:</strong>
+        <div class="input-control text span2 disabled">
+            @Html.TextBoxFor(model => model.Date, new { @class = "date-picker" })
+
+            @Html.ValidationMessageFor(model => model.Date)
+        </div>
+
+        <div>
+        <strong>LEVEL:</strong>
+            @Html.ValidationMessageFor(model => model.Level)
+
+            <label class="radiobox">
+            @Html.RadioButtonFor(model => model.Level, "UnImportant",new{@checked=Model.Level=="UnImportant"}) <span class="fg-color-grayDark"><strong>UnImportant</strong></span>
+            </label>
+            <label class="radiobox">
+            @Html.RadioButtonFor(model => model.Level, "Normal",new{@checked=Model.Level=="Normal"}) <span class="fg-color-orange"><strong>Normal</strong> </span>
+            </label>
+            <label class="radiobox">
+            @Html.RadioButtonFor(model => model.Level, "Vital",new{@checked=Model.Level=="Vital"}) <span class="fg-color-red"><strong>Vital</strong></span>
+            </label>
+        </div>
+
+        <strong>TITLE:</strong>
+        <div class="input-control text span3">
+            @Html.TextBoxFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <strong>CONTENT:</strong>
+        <div class="input-control textarea span6">
+            @Html.TextAreaFor(model => model.Content)
+            @Html.ValidationMessageFor(model => model.Content)
+        </div>
+
+        <strong>ISCOMPLETE:</strong>
+        <div class="input-control textarea span6">
+            @Html.ValidationMessageFor(model => model.IsComplete)
+            <label class="radiobox">
+             @Html.RadioButtonFor(model => model.IsComplete, "False") <span class="fg-color-grayDark"><strong>False</strong></span>
+            </label>
+            <label class="radiobox">
+            @Html.RadioButtonFor(model => model.IsComplete, "True") <span class="fg-color-orange"><strong>True</strong> </span>
+            </label>
+        </div>
+         
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

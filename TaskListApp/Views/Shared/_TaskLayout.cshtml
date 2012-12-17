@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<meta name="description" content="" />
+		<meta name="author" content="libin" />
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+        @Styles.Render("~/Contents/mui")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+        @Scripts.Render("~/bundles/jqueryval")
+    </head>
+
+    <body>
+
+        <div class="page">
+        <div class="page-header">
+        <div class="page-header-content">
+
+            <div class="navigation-bar">
+	        <div class="navigation-bar-inner">
+	            <div class="brand">
+	            	<span class="name">My Task Site</span>
+	            </div>
+
+                <div class="place-right">
+                    @Html.Partial("_LoginPartial")
+                </div>	 
+                           			
+	            <div class="horizontal-menu place-left bg-color-blueLight">
+	            	<ul>
+	            		<li>@Html.ActionLink("Home","Index")</li>
+	            		<li>@Html.ActionLink("Overview","Overview",new {datetime=DateTime.Now.ToShortDateString()})</li>
+	            		<li>@Html.ActionLink("Add","Create")</li>
+	            		<li>@Html.ActionLink("Analysize","Analysize")</li>
+	            	</ul>
+	            </div>
+
+
+	        </div>
+	        </div>
+
+
+        </div>
+        </div>
+ 
+        <div class="page-region">
+        <div class="page-region-content">
+
+            @RenderBody()
+
+        </div>
+        </div>
+
+            <footer>
+                    <div class="text-center">
+                        <p>&copy; @DateTime.Now.Year - 我的 ASP.NET MVC 应用程序</p>
+                    </div>
+            </footer>
+
+        </div>
+
+    </body>
+
+</html>
+

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<TaskListApp.Models.Task>
+@{
+    ViewBag.Title = "Chart";
+    Dictionary<string,int> dictionary=new Dictionary<string,int>();
+    foreach(var item in Model)
+    {
+        string month = item.Date.ToString("y");
+        if(dictionary.ContainsKey(month))
+        {
+            dictionary[month]++;
+        }else{
+            dictionary.Add(month,1);
+        }
+    }
+}
+
+<p>
+@{
+    var mychart = new Chart(width: 600, height: 400,theme:ChartTheme.Vanilla)
+        .AddTitle(text: "All Tasks Overview", name: "taskChart")
+        .AddSeries(
+        name: "Default"
+        , xValue: dictionary.Keys
+        , yValues: dictionary.Values
+        , chartType: "pie"
+        ).Write();
+}
+</p>

@@ -1,0 +1,47 @@
+﻿@model TaskListApp.Models.Task
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_TaskLayout.cshtml";
+}
+
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Task</legend>
+
+     <strong>DATE:</strong>
+    <h4>
+        @Html.DisplayFor(model => model.Date)
+    </h4>
+
+    <strong>TITLE:</strong>
+    <h4>
+        @Html.DisplayFor(model => model.Title)
+    </h4>
+
+    <strong>CONTENT:</strong>
+    <h4>
+        @Html.DisplayTextFor(model => model.Content)
+    </h4>
+
+    <strong>LEVEL:</strong>
+    <h4>
+        @Html.DisplayFor(model => model.Level)
+    </h4>
+
+    <strong>ISCOMPLETE:</strong>
+    <h4>
+        @Html.DisplayTextFor(model => model.IsComplete)
+    </h4>
+
+</fieldset>
+
+<br />
+
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> 
+             @Html.ActionLink("Back to List", "Index")
+    </p>
+}

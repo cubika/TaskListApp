@@ -1,0 +1,93 @@
+﻿@model IEnumerable<TaskListApp.Models.Task>
+
+@{
+    ViewBag.Title = "Overview";
+    Layout = "~/Views/Shared/_TaskLayout.cshtml";
+}
+
+
+	<script type="text/javascript">
+		$(function(){
+			$('.date-picker').datepicker({
+		        inline: true
+		    });
+     		    
+		})
+	</script>
+
+<h2>Overview</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using(@Html.BeginForm())
+{
+    
+    <strong>Date:</strong> 
+    <div class="input-control text span2 disabled">
+    <input type="text" name="taskDate" value="@ViewBag.Date" class="date-picker"/>
+     </div>
+    <input type="submit" value="OK" />
+}
+
+<table class="hovered bordered striped">
+
+    <thead>
+    
+        <tr>
+        <th class="center">
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th class="center">
+            @Html.DisplayNameFor(model => model.Content)
+        </th>
+        <th class="center">
+            @Html.DisplayNameFor(model => model.Level)
+        </th>
+        <th class="center">
+            @Html.DisplayNameFor(model => model.IsComplete)
+        </th>
+        <th></th>
+        </tr>
+     </thead>
+
+<tbody>
+@foreach (var item in Model) {
+
+    
+    <tr class="@getCunstomClass(item.Level.Trim())">
+        <td class="center">
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td class="center">
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+        <td class="center">
+            @Html.DisplayFor(modelItem => item.Level)
+        </td>
+        <td class="center">
+            @Html.DisplayTextFor(modelItem => item.IsComplete)
+        </td>
+        <td class="center">
+            @Html.ActionLink("Edit", "Edit", new { id=item.TaskId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TaskId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TaskId })
+        </td>
+    </tr>
+}
+
+</tbody>
+
+</table>
+
+@functions{
+    public string getCunstomClass(string level)
+    {
+        if (level.Equals("Normal"))
+            return "info";
+        else if (level.Equals("Vital"))
+            return "error";
+        else return "";
+    }
+}

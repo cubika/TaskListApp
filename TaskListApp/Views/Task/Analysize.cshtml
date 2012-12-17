@@ -1,0 +1,89 @@
+﻿@model IEnumerable<TaskListApp.Models.Task>
+
+@{
+    Layout = "~/Views/Shared/_TaskLayout.cshtml";
+    ViewBag.Title = "Analysize";
+
+    var beforeUncomplete = 0;
+    var beforeComplete = 0;
+    var afterUncomplete = 0;
+    var afterComplete = 0;
+    
+    foreach(var item in Model)
+    {
+        if(item.Date<DateTime.Today)
+        {
+            if (item.IsComplete == true)
+            {
+                beforeComplete++;
+            }
+            else
+            {
+                beforeUncomplete++;
+            }
+        }else{
+            if (item.IsComplete == true)
+            {
+                afterComplete++;
+            }
+            else
+            {
+                afterUncomplete++;
+            }
+        }
+        
+    }
+
+    var beforeCount = beforeUncomplete + beforeComplete;
+    var afterCount = afterComplete + afterUncomplete;
+    var uncompleteCount = beforeUncomplete + afterUncomplete;
+    var completeCount = beforeComplete + afterComplete;
+    var total = uncompleteCount + completeCount;
+
+}
+
+<h2>Summary</h2>
+<table class="bordered span8 offset2">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                Complete
+            </th>
+            <th>
+                UnComplete
+            </th>
+            <th>
+                TotalCount
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>BeforeToday</td>
+            <td>@beforeComplete</td>
+            <td>@beforeUncomplete</td>
+            <td>@beforeCount</td>
+        </tr>
+        <tr>
+            <td>AfterToday</td>
+            <td>@afterComplete</td>
+            <td>@afterUncomplete</td>
+            <td>@afterCount</td>
+        </tr>
+        <tr>
+            <td>Total</td>
+            <td>@uncompleteCount</td>
+            <td>@completeCount</td>
+            <td>@total</td>
+        </tr>
+    </tbody>
+
+</table>
+
+<br />
+<h2>Chart</h2>
+<div class="text-center">
+<p><img src="Chart" /></p>
+</div>

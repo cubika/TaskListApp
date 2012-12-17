@@ -1,0 +1,57 @@
+﻿@model IEnumerable<TaskListApp.Models.Task>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_TaskLayout.cshtml";
+}
+
+<h2>UnComplete:</h2>
+
+<div class="grid">
+@foreach (var item in Model) {
+    if (item.IsComplete == false)
+    {
+        
+        <div class="row">
+
+            <div class="border-color-blue text-center span6 blocklink">
+                @Html.ActionLink(item.Content, "Details", new { id = item.TaskId })
+            </div>
+            <div class="span6">
+            @Html.ActionLink("SetToComplete","Complete",new {id=item.TaskId})   |
+            @Html.ActionLink("Edit", "Edit", new { id=item.TaskId })  |
+            @Html.ActionLink("Details", "Details", new { id=item.TaskId })  |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TaskId })
+            </div>
+
+        </div>
+
+
+    }
+}
+    <div class="as-block border-dashed text-center span6 blocklink">
+        @Html.ActionLink("Create New", "Create")
+    </div>
+
+
+<hr />
+<h2>Complete:</h2>
+@foreach (var item in Model) {
+    if (item.IsComplete == true)
+    {
+        <div class="row">
+
+            <div class="border-color-blue span6 text-center blocklink">
+                @Html.ActionLink(item.Content, "Details", new { id = item.TaskId })
+            </div>
+            <div class="span6">
+            @Html.ActionLink("Edit", "Edit", new { id=item.TaskId })  |
+            @Html.ActionLink("Details", "Details", new { id=item.TaskId })  |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TaskId })
+            </div>
+
+        </div>
+    }
+}
+
+</div>
